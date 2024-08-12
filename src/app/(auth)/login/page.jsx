@@ -1,18 +1,5 @@
-
-
-
-const LoginPage = () => {
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <form action={handleGithubLogin}>
-          <button className={styles.github}>Login with Github</button>
-        </form>
-        <LoginForm />
-      </div>
-    </div>
-  );
+const Admin = () => {
+  return <div>Admin Page!</div>;
 };
 
-export default LoginPage;
+export default Admin;

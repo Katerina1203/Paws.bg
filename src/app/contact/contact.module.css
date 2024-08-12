@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    width: 100%;
+	min-height: 100vh;
+
+}
+
+.imgContainer {
+    height: 50vh;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: var( --bd-rds);
+    object-fit: contain;
+    margin-left: 50px;
+}
+
+.fieldsContainer {
+    flex: 1;
+    padding-left: 70px;
+
+}
+
+.img {
+  
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form input {
+    height: 6vh;
+    width: 70%;
+    border-radius: 1rem;
+    border: 1px solid var(--textBackground);
+    outline: none;
+    background-color: var(--textBackground);
+    color: var(--text);
+    padding: 1rem;
+}
+
+.button {
+    width: 10%;
+    color: var(--btn);
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}

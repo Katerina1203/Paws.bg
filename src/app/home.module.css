@@ -1,6 +1,98 @@
-.textContainer{
-    align-items: center;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 100vh;
+	flex-direction: column;
 }
-.buttonContainer{
-    align-items: center;
+
+.section {
+	
+	position: relative;
+	height: 100vh;
+	width: 100%;
+}
+
+.part1 {
+	display: flex;
+	
+}
+
+.part2 {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+
+}
+
+.part3 {
+	display: flex;
+	flex-direction: row;
+margin-top: 100px;
+}
+
+.part4 {
+	display: flex;
+	flex-direction: column;
+}
+
+
+.part5 {
+	display: flex;
+	flex-direction: column;
+}
+.part6{
+	display: flex;
+	justify-content: right;
+}
+.textContainer {
+	flex: 1;
+}
+
+.title {
+	font-size: 5rem;
+}
+
+.h5{
+	font-size: 2rem;
+}
+
+.information {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	
+}
+
+
+
+.button {
+	
+color: darkmagenta;
+	cursor: pointer;
+
+}
+
+
+.imgContainer {
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+	border-radius:var( --bd-rds);
+}
+.roundedImg{
+	
+	border-radius: var( --bd-rds);
+}
+
+.rightContainer{
+	/* margin-top: 200px; */
+/* padding-top:500px; */
+}
+
+.bottomTextContainer{
+	display: flex;
+	justify-content: center;
+	margin-top:100px;
+
 }

@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    
+}
+
+.imgContainer {
+    flex: 1;
+    position: relative;
+    height:calc(100vh - 200px) ;
+}
+
+.img {
+    object-fit: cover;
+}
+
+.textContainer {
+    flex: 1;
+    flex-direction: column;
+    margin-left: 50px;
+    /* gap: 50px; */
+}
+
+.firstLine {
+    font-style: italic;
+}
+
+.detail {
+    display: flex;
+    gap: 50px;
+}
+
+.avatar {
+    object-fit: cover;
+    border-radius: 50%;
+}

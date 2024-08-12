@@ -1,16 +1,44 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-
-const Home = () => {
-  return <div className={styles.imgContainer}>
-     <Image
-          src="/catanddog.png"
-          alt="About Image"
-          fill
-    
-        />
-       
-       </div>;
+import Carousel from "@/components/carousel/Carousel";
+export const metadata = {
+  title: "About Page",
+  description: "About description",
 };
+const AboutPage = () => {
 
-export default Home;
+  return (
+    <div className={styles.container}>
+      <div className={styles.textContainer}>
+        <h1 className={styles.title}>
+        Lorem ipsum dolor sit amet. Et dolore esse At 
+        </h1>
+        <p className={styles.information}>
+        Lorem ipsum dolor sit amet. Et dolore esse At explicabo dolore in magnam voluptatum qui suscipit iusto hic cumque quia aut 
+        laboriosam excepturi? Et eius omnis rem quos quia aut culpa fuga et adipisci molestias id eaque cumque aut fuga eius qui iusto
+         quasi? Et rerum maxime in dolorum aliquid et saepe voluptates eum vitae tempore qui minima eaque ut deserunt quas est ipsa nihil. 
+        
+        </p>
+        
+        <div className={styles.boxes}>
+          <div className={styles.box}>
+            <h1>Lorem ipsum</h1>
+            <p>omnis rem quos</p>
+          </div>
+          <div className={styles.box}>
+            <h1>Lorem ipsum+</h1>
+            <p>esse At explicabo</p>
+          </div>
+          <div className={styles.box}>
+            <h1>Lorem ipsum</h1>
+            <p>esse At explicabo</p>
+          </div>
+        </div>
+      </div>
+      <div className={styles.imgContainer}>
+       <Carousel/>
+      </div>
+    </div>
+  );
+};
+export default AboutPage;

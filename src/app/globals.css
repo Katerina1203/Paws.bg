@@ -2,73 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --text:black;
-  --bg:linear-gradient(45deg, rgb(252, 255, 250), rgb(248, 234, 237), rgb(242, 207, 219));
+:root {
+  --text: black;
+  --bg: linear-gradient(45deg, rgb(252, 255, 250), rgb(248, 234, 237), rgb(242, 207, 219));
+  --btn: darkmagenta;
+  --textBackground: white;
+  --bd-rds: 20px;
 }
-*{
+
+* {
   margin: 0;
-  padding:0;
+  padding: 0;
   box-sizing: border-box;
 }
-body {
 
+body {
   background: var(--bg);
-    color: var(--text);
+  color: var(--text);
 }
-a{
+
+a {
   text-decoration: none;
   color: inherit;
 }
-.container{
 
+.container {
   width: 1536px;
   margin: auto;
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-@media (max-width: 1536px) {
-  .container {
-    width: 1366px;
-  }
-}
-
-@media (max-width: 1366px) {
-  .container {
-    width: 1280px;
-  }
-}
-
-@media (max-width: 1280px) {
-  .container {
-    width: 1024px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container {
-    width: 768px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 640px;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    width: 475px;
-  }
-}
-@media (max-width: 475px) {
-  .container {
-    width: 380px;
-  }
 }

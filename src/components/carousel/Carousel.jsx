@@ -1,75 +1,53 @@
 "use client"; 
 import Link from "next/link";
-import React from "react";
+import { Carousel } from "react-responsive-carousel";
+//import { items } from "../public/items.json";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import "./Carousel.css";
 
-const Carousel = () => {
-  const filteredItems = [
-    {
-      id: 1,
-      img: "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "camera",
-      price: 200,
-    },
-    {
-      id: 2,
-      img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "Phone",
-      price: 100,
-    },
-    {
-      id: 3,
-      img: "https://images.pexels.com/photos/12753820/pexels-photo-12753820.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "Laptop",
-      price: 500,
-    },
-    {
-      id: 4,
-      img: "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "Headephone",
-      price: 40,
-    },
-    {
-      id: 5,
-      img: "https://images.pexels.com/photos/163117/keyboard-white-computer-keyboard-desktop-163117.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "Keyboard",
-      price: 140,
-    },
-    {
-      id: 6,
-      img: "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&cs=tinysrgb&w=600",
-      description: "Gaming Mouse",
-      price: 140,
-    },
-  ];
 
-  const slideLeft = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft - 235;
-  };
 
-  const slideRight = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft + 235;
-  };
+const filteredItems = [
+  {
+    id: 1,
+    img: "https://www.aspca.org/sites/default/files/how-you-can-help_adoptions-tips_main-image-dog.jpg",
+    description: "",
+    
+  },
+  {
+    id: 2,
+    img: "https://rspca.sfo2.cdn.digitaloceanspaces.com/public/Uploads/adopt-a-pet-adopting-a-dog-selecting-your-dog__FocusFillWzE0NzIsNjI0LCJ5IiwxMDFd.jpg",
+    description: "",
+ 
+  },
+  {
+    id: 3,
+    img: "https://www.unioncountysheriffsoffice.com/home/showpublishedimage/1952/637728311968300000",
+    description: "",
+   
+  },
+  {
+    id: 4,
+    img: "https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg",
+    description: "",
+   
+  },
+  
+];
+
+
+const CarouselComponent = () =>{
   return (
-    <>
-      <div className="trending">
-        <div className="container">
-          <div className="title-btns">
-            <h3></h3>
-            <div className="btns">
-              <button title="scroll left" onClick={slideLeft}>
-            
-              </button>
-              <button title="scroll right" onClick={slideRight}>
-        
-              </button>
-            </div>
-          </div>
-          <div className="row-container" id="slider">
-            {filteredItems.map((item) => (
+    <div >
+      <Carousel
+        showArrows={false}
+        showIndicators={true}
+        infiniteLoop={true}
+        dynamicHeight={false}
+        autoPlay={true}
+  
+      >
+         {filteredItems.map((item) => (
               <div key={item.id} className="row-item">
                 <Link href={`/`} className="link">
                   <div className="item-header">
@@ -77,15 +55,14 @@ const Carousel = () => {
                   </div>
                   <div className="item-description">
                     <p>{item.description}</p>
-                    <p className="item-price">{item.price}$</p>
                   </div>
                 </Link>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-    </>
+      </Carousel>
+    </div>
   );
-};
-export default Carousel;
+
+
+}
+export default CarouselComponent;
