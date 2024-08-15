@@ -50,7 +50,7 @@ const isAdmin=false;
             <button className={styles.logout}>Logout</button>
             </>
   ):(
-    <NavBarLink item={{title:"Login" ,path:"/login"}}/>
+    <NavBarLink item={{title:"Login" ,path:"/verifyUser"}}/>
   )
 
 
