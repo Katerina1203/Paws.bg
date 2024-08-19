@@ -2,12 +2,17 @@ import styles from "./footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={styles.container}>
-      <div>Paws</div>
-      <div className={styles.text}>
-          made with ♥ by Kate
+    <footer className={styles.container}>
+      <div className={styles.logo}>Paws</div>
+      <div className={styles.links}>
+        <a href="/about" className={styles.link}>About</a>
+        <a href="/services" className={styles.link}>Services</a>
+        <a href="/contact" className={styles.link}>Contact</a>
       </div>
-    </div>
+      <div className={styles.text}>
+        Made with ♥ by Kate
+      </div>
+    </footer>
   );
 };
 

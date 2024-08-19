@@ -13,8 +13,8 @@ export const connectDB = async () => {
         }
         const db = await mongoose.connect(process.env.MONGODB)
         connection.isConnected = db.connections[0].readyState
-    } catch (error) {
-        console.log(error)
+    } catch (e) {
+        console.log(e)
             
     }
 };
@@ -35,8 +35,8 @@ export const storeFile = async (req) => {
         buffer
       );
       return NextResponse.json({ Message: "Success", status: 201 });
-    } catch (error) {
-      console.log("Error occured ", error);
+    } catch (e) {
+      console.log("Error occured ", e);
       return NextResponse.json({ Message: "Failed", status: 500 });
     }
   };

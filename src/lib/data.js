@@ -9,9 +9,8 @@ export const getAnimals= async() =>{
         connectDB()
         const animals= await Animal.find()
         return animals
-    } catch (error) {
-        console.log(error)
-      
+    } catch (e) {
+        console.error(e)   
     }
 };
 
@@ -21,19 +20,17 @@ export const getAnimalAd=async(id) =>{
         const animal= await Animal.findOne({id})
 
         return animal
-    } catch (error) {
-        console.log(error)
-    
-    }  
+    }catch (e) {
+        console.error(e)   
+    } 
 };
 export const getPhotos= async(id) =>{
     try {
         connectDB()
         const photos= await Photo.find({ownerID:id})
         return photos
-    } catch (error) {
-        console.log(error)
-      
+    } catch (e) {
+        console.error(e)   
     }
 };
 
@@ -44,9 +41,8 @@ export const getUser=async(id) =>{
         const user= await User.findById(id)
 
         return user
-    } catch (error) {
-        console.log(error)
-     
+    } catch (e) {
+        console.error(e)   
     }  
 };
 export const getAllUser=async() =>{
@@ -54,8 +50,7 @@ export const getAllUser=async() =>{
         connectDB()
         const users= await User.find()
         return users
-    } catch (error) {
-        console.log(error)
-      
+    }catch (e) {
+        console.error(e)   
     }  
 };

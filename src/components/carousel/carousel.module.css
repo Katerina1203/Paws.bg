@@ -1,0 +1,81 @@
+/* CarouselComponent.module.css */
+
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin: auto;
+    overflow: hidden; /* Ensure content doesn't overflow */
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+  }
+  
+  .card {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
+    position: relative;
+    opacity: 0;
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    object-fit: cover;
+  }
+  
+  .cardContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 16px;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .navContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .navButton {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navButton:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Hide cards that are not active */
+  .hidden {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .active {
+    opacity: 1;
+    position: relative;
+  }
+  

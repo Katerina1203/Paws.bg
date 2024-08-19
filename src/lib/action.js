@@ -5,9 +5,12 @@ import { connectDB } from "./utils";
 
 import path from "path";
 import { writeFile } from "fs/promises";
+import { signIn, signOut } from "@/auth";
+import { log } from "console";
+
+
 export const uploadAnimalPhotos = async (formData) => {
 	await connectDB();
-	//export const uploadAnimalPhotos = async (formData,animalId)=>{
 	const files = formData.getAll("file");
 
 
@@ -37,8 +40,8 @@ export const uploadAnimalPhotos = async (formData) => {
 			});
 			console.log('Photo saved to the database');
 		}
-	} catch (error) {
-		console.log("Error occured ", error)
+	} catch (e) {
+		console.log("Error occured ", e)
 	}
 }
 export const addAnimal = async (formData) => {
@@ -89,8 +92,8 @@ export const addAnimal = async (formData) => {
 
 		revalidatePath('/animals');
 
-	} catch (err) {
-		console.error(err.message);
+	} catch (e) {
+		console.error(e.message);
 		return { error: 'Something went wrong!' };
 	}
 };
@@ -105,8 +108,46 @@ export const deleteAnimal = async (formData) => {
 		console.log("deleted from db");
 		revalidatePath("/animals");
 
-	} catch (err) {
-		console.log(err);
+	} catch (e) {
+		console.log(e);
 		return { error: "Something went wrong!" };
 	}
 };
+export const handleGoogleLogin = async () => {
+	"use server";
+	await signIn("google",{redirectTo:"/"});
+  };
+  
+  export const handleLogout = async () => {
+	"use server";
+	await signOut({ redirectTo: "/" });
+  };
+
+  //users
+
+  export async function createUser(user)
+  {
+	try {
+		 await User.create(user)
+	} catch (e) {
+		console.error(e.message)
+	}
+  }
+  export async function createUserWithCredentials(formData) {
+	console.log("formData", formData);
+  
+	try {
+	  const response = await signIn("credentials", {
+		
+		email: formData.get("email"),
+		password: formData.get("password"),
+		redirect: false,
+	  });
+	
+	  
+	  return response;
+	} catch (e) {
+		console.error(e.message)
+	
+	}
+  }
