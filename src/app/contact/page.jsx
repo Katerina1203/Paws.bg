@@ -47,13 +47,13 @@ const Contact = () => {
           <h2>Follow Us</h2>
           <div className={styles.socialIcons}>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faFacebook} className={styles.icon} />
             </a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faTwitter} className={styles.icon} />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FontAwesomeIcon icon={faInstagram} />
+              <FontAwesomeIcon icon={faInstagram} className={styles.icon} />
             </a>
           </div>
         </div>

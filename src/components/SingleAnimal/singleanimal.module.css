@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.imgContainer {
+    flex: 1;
+    position: relative;
+    height: calc(100vh - 200px);
+    overflow: hidden;
+    border-radius: var(--bd-rds); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    border: 10px solid white; 
+}
+
+.img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.textContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: var(--bd-rds);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.detailLines {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.specs {
+    font-weight: bold;
+    color: #333;
+}
+
+.createdOn {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+
+
+.profileImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #000000; 
+}
+
+.description {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.desc {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}

@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.0",
+    "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
+    "@svgr/webpack": "^8.1.0",
     "bcryptjs": "^2.4.3",
     "install": "^0.13.0",
     "mongoose": "^8.0.0",
@@ -25,7 +26,8 @@
     "npm": "^10.8.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

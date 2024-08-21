@@ -1,38 +1,64 @@
 .container {
-    display: flex;
-    gap: 100px;
-  }
+  display: flex;
+  gap: 100px;
+  padding: 50px;
+}
+
+.textContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.title {
+  font-size: 54px;
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+}
+
+.information {
+  font-size: 20px;
+  font-weight: 300;
+  color: #666;
+}
+
+.boxes {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.box {
+  flex: 1;
+  background: #f9f9f9;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boxTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.boxText {
+  font-size: 16px;
+  color: #666;
+}
+
+.imgContainer {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50px;
   
-  .textContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-  }
-  .title{
-    font-size: 54px;
-  }
-  
-  .information{
-    font-size: 20px;
-    font-weight: 300;
-  }
-  
-  .boxes{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .imgContainer {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50px;
-  }
-  
-  .img{
-    object-fit: contain;
-    width: "auto";
-  }
- 
+}
+
+.img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}

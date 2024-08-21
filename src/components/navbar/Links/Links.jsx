@@ -2,6 +2,7 @@ import styles from "./links.module.css";
 import NavBarLink from "../NavBarLink";
 import {auth} from "@/auth"
 import { redirect } from "next/navigation";
+import { getUser } from "@/lib/data";
 
 const links = [
 
@@ -30,9 +31,10 @@ const links = [
 const userLogin = async () => {
 
 	const session = await auth();
-	console.log("*****");
-  console.log(session);
-  console.log("*****");
+	console.log(session);
+
+	const dbUser = await getUser(session.user.email)
+	
 
 	return (
 		<div className={styles.container}>
@@ -44,7 +46,7 @@ const userLogin = async () => {
 					session ? (
 						<>
 
-							<NavBarLink item={{ title: `${session.user.username}`, path: "/user" }} />
+							<NavBarLink item={{ title: `${session.user.name}`, path: `/user/${dbUser.id}` }} />
               
 							
 						</>

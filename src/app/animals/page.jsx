@@ -1,15 +1,20 @@
-import AnimalCard from "@/components/animalCard/AnimalCard"
+import AnimalCard from "@/components/animalCard/AnimalCard";
 import styles from './animals.module.css'
-import { getAnimals } from "@/lib/data";
+import { getAnimals } from "@/lib/data"
+
 const Animals = async () => {
-  const animals=await getAnimals() 
-    return <div className={styles.container}>
-    {animals.map((animal)=>
-    <div className={styles.animal} key={animal.id}> 
-      <AnimalCard animal={animal}/>
+  const animals = await getAnimals();
+  console.log(animals)
+
+  return (
+    <div className={styles.postsGrid}>
+      {animals.map((animal) => (
+        <div className={styles.postCard} key={animal._id}> 
+          <AnimalCard animal={animal} />
+        </div>
+      ))}
     </div>
-    )}
-    </div>;
-  };
-  
-  export default Animals;
+  );
+};
+
+export default Animals;

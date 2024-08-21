@@ -1,8 +1,6 @@
 "use client";
-
 import { useState, useEffect } from 'react';
-import { Box, IconButton } from '@mui/material';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import styles from './carousel.module.css';
 
 const filteredItems = [
@@ -39,14 +37,6 @@ const CarouselComponent = () => {
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredItems.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + filteredItems.length) % filteredItems.length);
-  };
-
   return (
     <Box className={styles.carouselContainer}>
       <Box className={styles.carousel}>
@@ -54,9 +44,7 @@ const CarouselComponent = () => {
           <Box
             key={item.id}
             className={`${styles.card} ${
-              index === currentIndex
-                ? styles.active
-                : styles.hidden
+              index === currentIndex ? styles.active : styles.hidden
             }`}
           >
             <img
@@ -65,18 +53,20 @@ const CarouselComponent = () => {
               className={styles.cardImage}
             />
             <Box className={styles.cardContent}>
-              <p>{item.description}</p>
+              <p className={styles.description}>{item.description}</p>
             </Box>
           </Box>
         ))}
       </Box>
-      <Box className={styles.navContainer}>
-        <IconButton onClick={prevSlide} className={styles.navButton} aria-label="Previous slide">
-          <ArrowBack />
-        </IconButton>
-        <IconButton onClick={nextSlide} className={styles.navButton} aria-label="Next slide">
-          <ArrowForward />
-        </IconButton>
+      <Box className={styles.indicatorContainer}>
+        {filteredItems.map((_, index) => (
+          <Box
+            key={index}
+            className={`${styles.indicator} ${
+              index === currentIndex ? styles.activeIndicator : ""
+            }`}
+          />
+        ))}
       </Box>
     </Box>
   );

@@ -22,7 +22,7 @@ const Home = () => {
 					</div>
 				</div>
 				<div className={styles.imgContainer}>
-					<Image src="/two-kittens.jpg" alt="" fill />
+					<Image src="/two-kittens.jpg" className={styles.postCard} alt="" fill />
 				</div>
 			</div>
 			<div className={`${styles.section} ${styles.part2}`}>
@@ -60,7 +60,10 @@ const Home = () => {
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero
 					blanditiis adipisci minima reiciendis a autem assumenda dolore.
 				</p>
-				<Image src="/two-cats.jpg" alt="" fill className={styles.roundedImg} />
+				<div className={styles.postGrid}>
+					<Image src="/two-cats.jpg" alt="" fill className={styles.postCard} />
+					</div>
+				
 			</div>
 			<div className={`${styles.section} ${styles.part3}`}>
 				<div className={styles.leftContainer}>
@@ -70,7 +73,7 @@ const Home = () => {
 							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero
 						</p>
 					</div>
-					<Image src="/girl-with-cat.jpg" className={styles.roundedImg} width={400} height={300} alt="" />
+					<Image src="/girl-with-cat.jpg" className={styles.postCard} width={400} height={300} alt="" />
 					<div className={styles.buttons}>
 						<Button className={styles.button}>Learn More</Button>
 						<Button className={styles.button}>Contact</Button>
@@ -83,7 +86,7 @@ const Home = () => {
 
 			<div className={styles.rightContainer}>
 					<div className={styles.centrateRight}>
-						<Image src="/family-with-dog.jpg" className={styles.roundedImg} width={400} height={300} alt="" />
+						<Image src="/family-with-dog.jpg" className={styles.postCard} width={400} height={300} alt="" />
 						<div className={styles.buttons}>
 							<Button className={styles.button}>Learn More</Button>
 							<Button className={styles.button}>Contact</Button>

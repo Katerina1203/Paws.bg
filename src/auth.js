@@ -4,35 +4,36 @@ import Credential from "next-auth/providers/credentials";
 import { User } from "./lib/models";
 import bcrypt from "bcryptjs"
 import { connectDB } from "./lib/utils";
-
+import { authConfig } from "./lib/auth.config";
 const login = async (credentials) => {
     try {
         connectDB();
-      const user = await User.findOne({ email: credentials?.email });
-  
-      if (!user) throw new Error("Wrong credentials!");
-  
-      const isPasswordCorrect = await bcrypt.compare(
-        credentials.password,
-        user.password
-      );
-  
-      if (!isPasswordCorrect) throw new Error("Wrong credentials!");
-  
-      return user;
+        const user = await User.findOne({ email: credentials?.email });
+
+        if (!user) throw new Error("Wrong credentials!");
+
+        const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
+            user.password
+        );
+
+        if (!isPasswordCorrect) throw new Error("Wrong credentials!");
+
+        return user;
     } catch (err) {
-      console.log(err);
-      throw new Error("Failed to login!");
+        console.log(err);
+        throw new Error("Failed to login!");
     }
-  };
+};
 export const {
     handlers: { GET, POST },
     auth,
     signIn,
     signOut,
 } = NextAuth({
-    session:{
-        strategy :'jwt',
+    ///   ...authConfig,
+    session: {
+        strategy: 'jwt',
         maxAge: 1 * 24 * 60 * 60, // 1 day
 
     },
@@ -48,7 +49,7 @@ export const {
                 },
             },
         }),
-        Credential({   
+        Credential({
             async authorize(credentials) {
                 if (credentials === null) return null;
                 try {
@@ -56,21 +57,20 @@ export const {
                     const user = await User.findOne({
                         email: credentials?.email
                     })
-                    if(!user)
-                    {
+                    if (!user) {
                         throw new Error("Credentials do not match!")
                     }
-                    
-                        const userExists = await bcrypt.compare(
-                            credentials.password,
-                            user.password
-                        );
 
-                        if (!userExists) {
-                            throw new Error("Email or Password is not correct")
-                        } 
-                        return user
-                    
+                    const userExists = await bcrypt.compare(
+                        credentials.password,
+                        user.password
+                    );
+
+                    if (!userExists) {
+                        throw new Error("Email or Password is not correct")
+                    }
+                    return user
+
                 } catch (e) {
                     console.log(e)
                     console.error(e)
@@ -79,30 +79,37 @@ export const {
             },
         }),
     ],
-    callbacks:{
-       async signIn({user,account,profile}){
-        console.log(user,account,profile)
-        if(account.provider==="google"){
-            connectDB()
-            try {
-                const user=await User.findOne({email:profile.email})
-                if(!user){
-                    const newUser=new User({
-                        username:profile.name,
-                        email:profile.email,
-                        img:profile.picture,
-                    })
-                    await newUser.save()
+    callbacks: {
+        async signIn({ user, account, profile }) {
+            console.log(user, account, profile)
+            if (account.provider === "google") {
+                connectDB()
+                try {
+                    const user = await User.findOne({ email: profile.email })
+                    if (!user) {
+                        const newUser = new User({
+                            username: profile.name,
+                            email: profile.email,
+                            img: profile.picture,
+                        })
+                        await newUser.save()
+                    }
+                } catch (e) {
+                    console.error(e);
+                    return false
                 }
-            } catch (e) {
-                console.error(e);
-                return false
             }
-        }
-        return true
-       },
-       authorized({auth,request}){
-
-       }
+            return true
+        },
+        async jwt({ token, user }) {
+			user && (token.user = user);
+			return token;
+		},
+		async session({ session, token }) {
+		
+			session.user = token.user;
+			return session;
+		},
+        //  ...authConfig.callbacks,
     }
 });

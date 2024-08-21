@@ -3,46 +3,41 @@ import styles from "./page.module.css";
 import Carousel from "@/components/carousel/Carousel";
 
 export const metadata = {
-  title: "About Page",
-  description: "About description",
+  title: "Our Services",
+  description: "Discover the services we offer",
 };
 
-const AboutPage = () => {
+const ServicesPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>
-          Lorem ipsum dolor sit amet. Et dolore esse At
+          Discover Our Exceptional Services
         </h1>
         <p className={styles.information}>
-          Lorem ipsum dolor sit amet. Et dolore esse At explicabo dolore in
-          magnam voluptatum qui suscipit iusto hic cumque quia aut laboriosam
-          excepturi? Et eius omnis rem quos quia aut culpa fuga et adipisci
-          molestias id eaque cumque aut fuga eius qui iusto quasi? Et rerum
-          maxime in dolorum aliquid et saepe voluptates eum vitae tempore qui
-          minima eaque ut deserunt quas est ipsa nihil.
+          We provide a range of high-quality services tailored to meet your needs. From personalized consultations to comprehensive solutions, our team is dedicated to delivering excellence. Explore what we offer and find out how we can assist you in achieving your goals.
         </p>
 
         <div className={styles.boxes}>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Lorem ipsum</h2>
-            <p className={styles.boxText}>omnis rem quos</p>
+            <h2 className={styles.boxTitle}>Consulting</h2>
+            <p className={styles.boxText}>Expert advice tailored to your business needs.</p>
           </div>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Lorem ipsum+</h2>
-            <p className={styles.boxText}>esse At explicabo</p>
+            <h2 className={styles.boxTitle}>Development</h2>
+            <p className={styles.boxText}>Custom solutions designed and built for you.</p>
           </div>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Lorem ipsum</h2>
-            <p className={styles.boxText}>esse At explicabo</p>
+            <h2 className={styles.boxTitle}>Support</h2>
+            <p className={styles.boxText}>Ongoing support to ensure your success.</p>
           </div>
         </div>
       </div>
       <div className={styles.imgContainer}>
-        <Carousel />
+        <Carousel className={styles.carousel} />
       </div>
     </div>
   );
 };
 
-export default AboutPage;
+export default ServicesPage;

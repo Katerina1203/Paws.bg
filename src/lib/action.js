@@ -44,7 +44,7 @@ export const uploadAnimalPhotos = async (formData) => {
 		console.log("Error occured ", e)
 	}
 }
-export const addAnimal = async (formData) => {
+export const createAnimal = async (formData) => {
 
 	console.log(formData);
 	try {
@@ -133,7 +133,7 @@ export const handleGoogleLogin = async () => {
 		console.error(e.message)
 	}
   }
-  export async function createUserWithCredentials(formData) {
+  export async function getUserWithCredentials(formData) {
 	console.log("formData", formData);
   
 	try {

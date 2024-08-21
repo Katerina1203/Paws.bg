@@ -1,7 +1,7 @@
-import UserCard from "@/components/userCard/UserCard";
+import UserProfile from "@/components/userProfile/UserProfile";
 const User = () => {
     return(
-        <UserCard/>
+        <UserProfile/>
     )
   };
   

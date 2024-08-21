@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const userSchema=new mongoose.Schema({
-    username:{
+    name:{
         type:String,
         require:true,
         unique:true,
@@ -56,8 +56,10 @@ const animalSchema=new mongoose.Schema({
         require:true,      
     },
     userID:{
-        type  :mongoose.Schema.ObjectId,
+        // type  :mongoose.Schema.ObjectId,
+        type:String,
         require:true,
+        ref: 'User',
     },
     age:{
         type:String,
@@ -71,10 +73,44 @@ const animalSchema=new mongoose.Schema({
         type:String,
         require:true,
     },
+    img:{
+        type:String,
+        require:true,
+    },
 },
 {timestamps:true}
 );
-
+const messageSchema = new mongoose.Schema({
+    senderId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true 
+    },
+    content: { 
+        type: String, 
+        required: true
+     },
+    
+  },
+  {timestamps:true}
+);
+  
+  const chatRoomSchema = new mongoose.Schema({
+    animalId: { 
+        type: mongoose.Schema.Types.ObjectId,
+         ref: 'Animal', 
+         required: true 
+        },
+    participants: 
+    [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User',
+         required: true
+        }],
+    messages: [messageSchema],
+  });
 export const User = mongoose.models.User || mongoose.model("User",userSchema);
 export const Animal = mongoose.models.Animal || mongoose.model("Animal",animalSchema);
 export const Photo = mongoose.models.Photo || mongoose.model("Photo",photoSchema);
+export const Message = mongoose.models.Message || mongoose.model("Message",messageSchema);
+export const ChatRoom = mongoose.models.ChatRoom || mongoose.model("ChatRoom",chatRoomSchema);

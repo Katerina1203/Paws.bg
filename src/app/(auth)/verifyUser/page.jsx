@@ -1,16 +1,3 @@
-
-// import LoginRegister from '@/components/loginRegister/LoginRegister'
-
-// export default function LoginPage() {
-//   return (
-//     <div >
-//       <div>
-//         <LoginRegister />
-//       </div>
-//     </div>
-//   )
-// }
-// src/components/FormSwitcher.jsx
 "use client"
 import React, { useState } from 'react';
 import LoginForm from '@/components/loginForm/LoginForm';

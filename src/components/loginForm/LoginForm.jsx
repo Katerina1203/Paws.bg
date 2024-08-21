@@ -1,6 +1,6 @@
 "use client";
 
-import { createUserWithCredentials } from "@/lib/action";
+import { getUserWithCredentials } from "@/lib/action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from './loginform.module.css';
@@ -14,7 +14,7 @@ const LoginForm =  ({ toggleForm }) => {
         try {
             const formData = new FormData(event.currentTarget);
 
-            const response = await createUserWithCredentials(formData);
+            const response = await getUserWithCredentials(formData);
 
             if (!!response.error) {
                 console.error(response.error);

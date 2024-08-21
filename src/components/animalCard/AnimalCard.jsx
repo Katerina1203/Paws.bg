@@ -2,7 +2,8 @@ import styles from './animalCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 const AnimalCard = ({animal}) => {
-    console.log(animal);
+    // console.log(animal)
+    
     return (
         <div className={styles.container}>
             <div className={styles.rightSide}>
