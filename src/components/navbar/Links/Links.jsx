@@ -19,8 +19,8 @@ const links = [
 		path: "/contact",
 	},
 	{
-		title: "Намери Дом",
-		path: "/findHome",
+		title: "Подай Сигнал",
+		path: "/signal",
 	},
 	{
 		title: "Организации",
@@ -31,9 +31,8 @@ const links = [
 const userLogin = async () => {
 
 	const session = await auth();
-	console.log(session);
 
-	const dbUser = await getUser(session.user.email)
+	const dbUser = await getUser(session?.user.email)
 	
 
 	return (

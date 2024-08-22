@@ -1,11 +1,9 @@
-import SingleAnimal from "@/components/SingleAnimal/singleAnimal"
 
+import SingleAnimal from "@/components/SingleAnimal/SingleAnimal";
 const AnimalPage = ({ params }) => {
   const { id } = params;
-
-  
   return <>
-    <SingleAnimal id={id} />
+    <SingleAnimal  id={id} />
   </>
 
 };

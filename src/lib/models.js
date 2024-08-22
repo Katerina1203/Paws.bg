@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const userSchema=new mongoose.Schema({
-    name:{
+    username:{
         type:String,
         require:true,
         unique:true,
@@ -46,7 +46,6 @@ const photoSchema = new mongoose.Schema({
   );
 
 const animalSchema=new mongoose.Schema({
-
     description:{
         type:String,
         require:true,      
@@ -54,12 +53,6 @@ const animalSchema=new mongoose.Schema({
     type:{
         type:String,
         require:true,      
-    },
-    userID:{
-        // type  :mongoose.Schema.ObjectId,
-        type:String,
-        require:true,
-        ref: 'User',
     },
     age:{
         type:String,
@@ -73,9 +66,11 @@ const animalSchema=new mongoose.Schema({
         type:String,
         require:true,
     },
-    img:{
+    userID:{
+        // type  :mongoose.Schema.ObjectId,
         type:String,
         require:true,
+        ref: 'User',
     },
 },
 {timestamps:true}

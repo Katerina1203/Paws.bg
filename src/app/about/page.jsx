@@ -12,7 +12,7 @@ const ServicesPage = () => {
     <div className={styles.container}>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>
-          Discover Our Exceptional Services
+        Осинови, не купувай.
         </h1>
         <p className={styles.information}>
           We provide a range of high-quality services tailored to meet your needs. From personalized consultations to comprehensive solutions, our team is dedicated to delivering excellence. Explore what we offer and find out how we can assist you in achieving your goals.

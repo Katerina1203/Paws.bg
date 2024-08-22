@@ -1,4 +1,4 @@
-//"use client"
+// "use client"
 import { getUserById, getAnimalsByUserId } from "@/lib/data";
 import styles from "./userprofile.module.css";
 import Image from "next/image";
@@ -7,17 +7,15 @@ import { handleLogout } from '@/lib/action';
 import { auth } from "@/auth";
 import AnimalCard from "../animalCard/AnimalCard";
 import { PlusCircle, Logout, Messages, Settings } from "../svgs";
-//import { useState } from "react";
+// import { useState } from "react";
 
+import CreateAnimalBtn from "../createAnimal/CreateAnimalBtn";
 export default async function UserProfile({ userID }) {
-  //  const [modalOpen, setModalOpen] = useState(false);
+//    const [modalOpen, setModalOpen] = useState(false);
 
-    // const handleOpenModal = () => {
-    //     setShowState((setModalOpen) => setModalOpen = !setModalOpen )
-    //  }
-
- 
-    console.log(userID);
+//     const handleOpenModal = () => {
+//         setShowState((setModalOpen) => setModalOpen = !setModalOpen )
+//      }
 
     const user = await getUserById(userID);
 
@@ -75,19 +73,12 @@ export default async function UserProfile({ userID }) {
                 ))}
             </div>
 
-            <div>
-                <button >
-                    <PlusCircle className={styles.addBtn} />
-                </button>
-            </div>
+            <CreateAnimalBtn/>
 
-        
+            {/* <CreateAnimalModal/> */}
             {/* {modalOpen && (
-                // <CreateAnimalModal 
-                //     open={modalOpen} 
-                //     handleClose={handleCloseModal} 
-                // />
-              //  <CreateAnimalModal show={modalOpen}  />
+             
+                <CreateAnimalModal show={handleOpenModal}  />
             )} */}
         </div>
     );

@@ -4,7 +4,7 @@ import { Animal, Photo, User } from "./models"
 import { unstable_noStore as noStore } from 'next/cache'
 import mongoose from "mongoose"
 const { ObjectId } = require('mongoose').Types;
-
+import bcrypt from "bcryptjs"
 
 export const createAnimal = async (animalData, userId) => {
     try {
@@ -104,7 +104,7 @@ export const getUserById = async (id) => {
         return null;
     }
 };
-export const getAllUser=async() =>{
+export const getAllUsers=async() =>{
     try {
         connectDB()
         const users= await User.find()
@@ -112,6 +112,50 @@ export const getAllUser=async() =>{
     }catch (e) {
         console.error(e)   
     }  
+};
+export const changeUser = async (id, updates) => {
+
+  try {
+      await connectDB();
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+          console.error("Invalid ObjectId format:", id);
+          return { success: false, message: "Invalid user ID format." };
+      }
+
+      const user = await User.findById({_id: id});
+      if (!user) {
+          console.error("User not found");
+          return { success: false, message: "User not found." };
+      }
+
+      if (updates.password) {
+          if (updates.password.length < 8 || updates.password.length > 25) {
+              return { success: false, message: "Password must be between 8 and 25 characters." };
+          }
+          updates.password = await bcrypt.hash(  updates.password, 10)
+       
+        }
+
+      const allowedUpdates = ['name', 'email', 'password', 'img'];
+      const updatesToApply = {};
+      for (const key of allowedUpdates) {
+          if (updates[key] !== undefined) {
+              updatesToApply[key] = updates[key];
+          }
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(id, updatesToApply, { new: true });
+      
+      if (!updatedUser) {
+          return { success: false, message: "Failed to update user." };
+      }
+
+      return { success: true, user: updatedUser };
+  } catch (e) {
+      console.error("Error updating user:", e);
+      return { success: false, message: "An error occurred while updating the user." };
+  }
 };
 export const getAnimalsByUserId = async (userId) => {
     try {

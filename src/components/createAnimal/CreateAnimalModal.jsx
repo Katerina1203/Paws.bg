@@ -1,200 +1,190 @@
-import * as React from 'react';
+"use client"
+import React from 'react';
+import { createAnimalPost } from "@/lib/action";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { uploadAnimalPhotos, createAnimal } from "@/lib/action"; 
-import styles from './createanimalmodal.module.css'; 
+import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	pt: 2,
+	px: 4,
+	pb: 3,
+	borderRadius: '8px', 
+};
 
-function ConfirmationModal({ open, handleClose }) {
-  return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="confirmation-modal-title"
-      aria-describedby="confirmation-modal-description"
-    >
-      <Box className={styles.modal} sx={{ width: 300 }}>
-        <h2 id="confirmation-modal-title">Confirm Creation</h2>
-        <p id="confirmation-modal-description">
-          Are you sure you want to create this animal?
-        </p>
-        <Button onClick={handleConfirm} sx={{ mr: 2 }}>Yes</Button>
-        <Button onClick={handleClose}>No</Button>
-      </Box>
-    </Modal>
-  );
-}
+// function ChildModal() {
+// 	const [open, setOpen] = React.useState(false);
+// 	const handleOpen = () => {
+// 		setOpen(true);
+// 	};
+// 	const handleClose = () => {
+// 		setOpen(false);
+// 	};
 
-export default function CreateAnimalModal() {
-  const [open, setOpen] = React.useState(false);
-  const [confirmOpen, setConfirmOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState({
-    description: '',
-    type: '',
-    age: '',
-    userId: '',
-    city: '',
-    gender: '',
-    files: [],
-  });
+// 	return (
+// 		<React.Fragment>
+// 			<Button onClick={handleOpen}>Запази</Button>
+// 			<Modal
+// 				open={open}
+// 				onClose={handleClose}
+// 				aria-labelledby="child-modal-title"
+// 				aria-describedby="child-modal-description"
+// 			>
+// 				<Box sx={{ ...style, width: 200 }}>
+// 					<h2 id="child-modal-title">A</h2>
+// 					<p id="child-modal-description">
+// 					 ok?
+// 					</p>
+// 					<Button onClick={handleClose}>Ok</Button>
+// 				</Box>
+// 			</Modal>
+// 		</React.Fragment>
+// 	);
+// }
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+const NestedModal = ({ open, setOpen }) => {
+	const [age, setAge] = useState('');
+	const [ageError, setAgeError] = useState('');
 
-  const handleClose = () => {
-    setOpen(false);
-    setConfirmOpen(false);
-  };
+	const handleOpen = () => {
+		setOpen(true);
+	};
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'files') {
-      setFormData((prevData) => ({
-        ...prevData,
-        files: files,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
+	const handleClose = () => {
+		setOpen(false);
+	};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setConfirmOpen(true); // Open the confirmation modal
-  };
+	const validateAge = (age) => {
+		if (age <= 0 || !Number.isInteger(Number(age))) {
+			return 'Age must be a positive integer';
+		}
+		return '';
+	};
 
-  const handleConfirm = async () => {
-    const uploadFormData = new FormData();
-    for (let key in formData) {
-      if (key === 'files') {
-        for (let i = 0; i < formData.files.length; i++) {
-          uploadFormData.append('file', formData.files[i]);
-        }
-      } else {
-        uploadFormData.append(key, formData[key]);
-      }
-    }
+	const handleAgeChange = (event) => {
+		setAge(event.target.value);
+		const errorMessage = validateAge(event.target.value);
+		setAgeError(errorMessage);
+	};
 
-    await uploadAnimalPhotos(uploadFormData);
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.target);
 
-    const result = await createAnimal(uploadFormData);
+		const errorMessage = validateAge(age);
+		if (errorMessage) {
+			setAgeError(errorMessage);
+			return;
+		}
 
-    if (result.error) {
-      console.error(result.error);
-    } else {
-      console.log('Animal created successfully!');
-    }
+		await createAnimalPost(formData);
+		handleClose();
+	};
+	return (
+		<div>
+			
+			
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="parent-modal-title"
+				aria-describedby="parent-modal-description"
+			>
+				<Box sx={style}>
+					<Typography variant="h6" id="parent-modal-title" gutterBottom>
+						Данни за животинчето
+					</Typography>
 
+					<form onSubmit={handleSubmit}>
+						<TextField
+							label="Description"
+							name="description"
+							variant="outlined"
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<TextField
+							label="Type"
+							name="type"
+							variant="outlined"
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<TextField
+							label="Age"
+							name="age"
+							value={age}
+							onChange={handleAgeChange}
+							error={Boolean(ageError)}
+							helperText={ageError}
+							variant="outlined"
+							fullWidth
+							margin="normal"
+							required
+							inputProps={{ min: 0 }}
+						/>
+						<TextField
+							label="City"
+							name="city"
+							variant="outlined"
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<TextField
+							label="Gender"
+							name="gender"
+							variant="outlined"
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<Button
+							variant="contained"
+							component="label"
+							fullWidth
+							sx={{ 
+								backgroundColor: '#c2426d', 
+								mt: 2,
+								'&:hover': {
+									backgroundColor: '#f3d7e0',
+								},
+							}}
+						>
+							Upload Images
+							<input type="file" name="file" multiple accept="image/*" hidden />
+						</Button>
+						<Button
+							type="submit"
+							variant="contained"
+							fullWidth
+							sx={{ 
+								backgroundColor: '#c2426d', 
+								mt: 3,
+								'&:hover': {
+									backgroundColor: '#f3d7e0', 
+								},
+							}}
+						>
+							Create
+						</Button>
+					</form>
+				</Box>
+			</Modal>
+		</div>
+	);
+};
 
-    handleClose();
-  };
-
-  return (
-    <div>
-      <Button onClick={handleOpen}>Create Animal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="create-animal-modal-title"
-        aria-describedby="create-animal-modal-description"
-      >
-        <Box className={styles.modal}>
-          <h2 id="create-animal-modal-title">Create Animal</h2>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Description"
-              variant="outlined"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Type"
-              variant="outlined"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Age"
-              variant="outlined"
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="User ID"
-              variant="outlined"
-              name="userId"
-              value={formData.userId}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="City"
-              variant="outlined"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Gender"
-              variant="outlined"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-            />
-            <Button
-              variant="contained"
-              component="label"
-              sx={{ mt: 2, mb: 2 }}
-            >
-              Upload Photos
-              <input
-                type="file"
-                name="files"
-                multiple={true}
-                accept="image/*"
-                onChange={handleChange}
-                hidden
-                required
-              />
-            </Button>
-            <Box className={styles.buttonContainer}>
-              <Button type="submit" variant="contained">Create</Button>
-              <Button type="button" onClick={handleClose}>Cancel</Button>
-            </Box>
-          </form>
-          <ConfirmationModal
-            open={confirmOpen}
-            handleClose={() => setConfirmOpen(false)}
-            handleConfirm={handleConfirm}
-          />
-        </Box>
-      </Modal>
-    </div>
-  );
-}
+export default NestedModal;

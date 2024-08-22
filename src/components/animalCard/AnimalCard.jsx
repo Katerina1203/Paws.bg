@@ -1,18 +1,21 @@
 import styles from './animalCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-const AnimalCard = ({animal}) => {
-    // console.log(animal)
-    
+
+import { takeAllPhotosForSingleAnimal } from '@/lib/action'
+
+const AnimalCard = async ({ animal }) => {
+    const photos = await takeAllPhotosForSingleAnimal(animal._id)
+    const str = 'D:\\WorkSpace\\diploma\\public\\'    
+    const strippedPath = photos[0].src.replace(str, '');
     return (
         <div className={styles.container}>
             <div className={styles.rightSide}>
                 <div className={styles.imgContainer}>
-             
-                    <Link className={styles.link} href={`/animals/${animal.id}`}>   
-                     <Image src={animal.img} className={styles.img} alt="" fill />
-                 </Link>
-                 
+                    <Link className={styles.link} href={`/animals/${animal.id}`}>
+                        <Image src={`/${strippedPath}`} className={styles.img} alt="" fill />
+                    </Link>
+
                 </div>
             </div>
             <div className={styles.bottomSide}>

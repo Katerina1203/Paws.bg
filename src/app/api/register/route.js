@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { createUser } from "@/lib/action"
 import bcrypt from "bcryptjs"
 import { connectDB } from "@/lib/utils"
-import {useformState} from "react-dom "
+import Image1 from "./../../../../public/noPhoto.png"
 import User from "@/app/user/page"
 export const POST = async (request) => {
     const { username, email, password,confirmPassword } = await request.json()
@@ -24,9 +24,11 @@ export const POST = async (request) => {
     const newUser = {
         username,
         password: hashedPass,
-        email
+        email,
+        // img:Image1.src,
     }
-  
+    console.log(newUser);
+    
         await createUser(newUser)
     } catch (e) {
         return new NextResponse(e.message, {

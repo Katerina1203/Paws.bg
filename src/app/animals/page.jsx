@@ -4,7 +4,6 @@ import { getAnimals } from "@/lib/data"
 
 const Animals = async () => {
   const animals = await getAnimals();
-  console.log(animals)
 
   return (
     <div className={styles.postsGrid}>
