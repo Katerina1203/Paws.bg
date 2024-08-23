@@ -1,0 +1,23 @@
+"use client"; // Ensure this file is treated as a client-side component
+import { Messages } from "../svgs";
+import { useRouter } from 'next/navigation';
+import styles from "./privatechatbutton.module.css"
+const PrivateChatButton = ({ session, user }) => {
+    const router = useRouter();
+
+    const handleMessages = () => {
+        const currentUserId = session.user.id;     
+        console.log(currentUserId);
+        
+        const room = [currentUserId, user._id.toString()].sort().join('-'); 
+        router.push(`/privatechat?room=${room}`); 
+    };
+
+    return (
+        <button onClick={handleMessages} >
+        <Messages className={styles.actionButton} />
+    </button>
+    );
+};
+
+export default PrivateChatButton;

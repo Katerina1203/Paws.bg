@@ -45,7 +45,7 @@ const userLogin = async () => {
 					session ? (
 						<>
 
-							<NavBarLink item={{ title: `${session.user.name}`, path: `/user/${dbUser.id}` }} />
+							<NavBarLink item={{ title: `${dbUser.username}`, path: `/user/${dbUser.id}` }} />
               
 							
 						</>

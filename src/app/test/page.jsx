@@ -1,12 +1,12 @@
 import { getSession } from '@/lib/action'; 
-import ChatComponent from '@/components/ChatComponent/ChatComponent';
+import ChatRoom from '@/components/ChatRoom/ChatRoom';
 
-export default async function ChatRoom() {
+export default async function ChatRoomView() {
   const session = await getSession();
 
   return (
     <div>
-      <ChatComponent session={session} />
+      <ChatRoom session={session} />
     </div>
   );
 }

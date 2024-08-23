@@ -85,25 +85,27 @@ const messageSchema = new mongoose.Schema({
         type: String, 
         required: true
      },
-    
+     chatRoom: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'ChatRoom',
+        required: true,
+      },
   },
   {timestamps:true}
 );
   
   const chatRoomSchema = new mongoose.Schema({
-    animalId: { 
-        type: mongoose.Schema.Types.ObjectId,
-         ref: 'Animal', 
-         required: true 
+    participants: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'User',
+          required: true,
         },
-    participants: 
-    [{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User',
-         required: true
-        }],
-    messages: [messageSchema],
-  });
+      ],
+  },
+  {timestamps:true}
+);
+  
 export const User = mongoose.models.User || mongoose.model("User",userSchema);
 export const Animal = mongoose.models.Animal || mongoose.model("Animal",animalSchema);
 export const Photo = mongoose.models.Photo || mongoose.model("Photo",photoSchema);

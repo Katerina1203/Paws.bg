@@ -5,6 +5,9 @@ import { connectDB } from "./utils"
 import path from "path"
 import { writeFile } from "fs/promises"
 import { signIn, signOut, auth } from "@/auth"
+import { useRouter } from 'next/navigation';
+
+
 
 export const createAnimalPost = async (formData) => {
 	try {
@@ -153,3 +156,9 @@ export const deleteUser = async (formData) => {
 	  return null;
 	}
   };
+
+//   export const handleMessages = (currentUserId,user) => {
+    
+// 	const room = [currentUserId, user._id.toString()].sort().join('-'); // Create a unique room ID
+// 	router.push(`/privatechat?room=${room}`); // Navigate to the private chat with the room ID
+// };

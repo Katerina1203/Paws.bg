@@ -29,8 +29,8 @@ const RegisterForm = ({ toggleForm }) => {
         })
       });
 
-      response.status === 201 ;
-    } catch (e) {
+      response.status === 201 &&   router.push("/");
+       } catch (e) {
       console.error(e);
       setError("Incorrect credentials!");
   }

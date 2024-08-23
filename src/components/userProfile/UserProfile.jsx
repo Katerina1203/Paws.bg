@@ -7,15 +7,15 @@ import { handleLogout } from '@/lib/action';
 import { auth } from "@/auth";
 import AnimalCard from "../animalCard/AnimalCard";
 import { PlusCircle, Logout, Messages, Settings } from "../svgs";
-// import { useState } from "react";
 
+import PrivateChatButton from "../PrivateChatButton/PrivateChatButton";
 import CreateAnimalBtn from "../createAnimal/CreateAnimalBtn";
-export default async function UserProfile({ userID }) {
-//    const [modalOpen, setModalOpen] = useState(false);
+import { useRouter } from "next/navigation";
+import { useSession } from 'next-auth/react';
 
-//     const handleOpenModal = () => {
-//         setShowState((setModalOpen) => setModalOpen = !setModalOpen )
-//      }
+export default async function UserProfile({ userID }) {
+    const session = await auth();
+
 
     const user = await getUserById(userID);
 
@@ -24,6 +24,7 @@ export default async function UserProfile({ userID }) {
         return null;
     }
 
+
     const animals = await getAnimalsByUserId(user._id.toString());
 
     return (
@@ -31,7 +32,7 @@ export default async function UserProfile({ userID }) {
             <div className={styles.profileCard}>
                 <div className={styles.imgContainer}>
                     <Image
-                        src={user.img}
+                        src={user.img|| "/noPhoto.png"}
                         alt={`${user.username}'s profile`}
                         className={styles.profileImage}
                         width={200}
@@ -53,9 +54,7 @@ export default async function UserProfile({ userID }) {
                         </div>
                     </div>
 
-                    <button className={styles.actionButton}>
-                        <Messages className={styles.actionButton} />
-                    </button>
+                    <PrivateChatButton session={session} user={user} />
                     <form action={handleLogout} className={styles.formLogoutBtn}>
                         <button className={styles.actionButton} type="submit">
                             <Logout className={styles.actionButton} />
@@ -72,14 +71,7 @@ export default async function UserProfile({ userID }) {
                     </div>
                 ))}
             </div>
-
             <CreateAnimalBtn/>
-
-            {/* <CreateAnimalModal/> */}
-            {/* {modalOpen && (
-             
-                <CreateAnimalModal show={handleOpenModal}  />
-            )} */}
         </div>
     );
 }
