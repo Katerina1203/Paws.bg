@@ -1,5 +1,5 @@
 // "use client"
-import { getUserById, getAnimalsByUserId } from "@/lib/data";
+import { getUserById, getAnimalsByUserId, getUser } from "@/lib/data";
 import styles from "./userprofile.module.css";
 import Image from "next/image";
 import CreateAnimalModal from "../createAnimal/CreateAnimalModal";
@@ -17,30 +17,31 @@ export default async function UserProfile({ userID }) {
     const session = await auth();
 
 
-    const user = await getUserById(userID);
+    const currentUser = await getUser(session.user.email);
+    const wantedUser = await getUserById(userID);
 
-    if (!user) {
+    if (!wantedUser) {
         console.error("User not found");
         return null;
     }
 
 
-    const animals = await getAnimalsByUserId(user._id.toString());
+    const animals = await getAnimalsByUserId(wantedUser._id.toString());
 
     return (
         <div className={styles.container}>
             <div className={styles.profileCard}>
                 <div className={styles.imgContainer}>
                     <Image
-                        src={user.img|| "/noPhoto.png"}
-                        alt={`${user.username}'s profile`}
+                        src={wantedUser.img|| "/noPhoto.png"}
+                        alt={`${wantedUser.username}'s profile`}
                         className={styles.profileImage}
                         width={200}
                         height={200}
                     />
                 </div>
-                <h1 className={styles.name}>{user.username}</h1>
-                <p className={styles.email}>{user.email}</p>
+                <h1 className={styles.name}>{wantedUser.username}</h1>
+                <p className={styles.email}>{wantedUser.email}</p>
 
                 <div className={styles.icons}>
                     <div className={styles.dropdown}>
@@ -54,7 +55,7 @@ export default async function UserProfile({ userID }) {
                         </div>
                     </div>
 
-                    <PrivateChatButton session={session} user={user} />
+                    <PrivateChatButton currentUserId={currentUser._id} wantedUser={wantedUser} />
                     <form action={handleLogout} className={styles.formLogoutBtn}>
                         <button className={styles.actionButton} type="submit">
                             <Logout className={styles.actionButton} />

@@ -2,14 +2,13 @@
 import { Messages } from "../svgs";
 import { useRouter } from 'next/navigation';
 import styles from "./privatechatbutton.module.css"
-const PrivateChatButton = ({ session, user }) => {
+const PrivateChatButton = ({ currentUserId, wantedUser }) => {
     const router = useRouter();
 
-    const handleMessages = () => {
-        const currentUserId = session.user.id;     
+    const handleMessages = () => {    
         console.log(currentUserId);
         
-        const room = [currentUserId, user._id.toString()].sort().join('-'); 
+        const room = [currentUserId, wantedUser._id.toString()].sort().join('-'); 
         router.push(`/privatechat?room=${room}`); 
     };
 

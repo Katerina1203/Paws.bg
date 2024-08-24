@@ -2,8 +2,10 @@
   "name": "diploma",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
+    "devServer": "nodemon D:\\WorkSpace\\diploma\\websocketServer\\server.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -18,6 +20,7 @@
     "@mui/material": "^5.16.7",
     "@svgr/webpack": "^8.1.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "http": "^0.0.1-security",
     "install": "^0.13.0",
     "mongoose": "^8.0.0",

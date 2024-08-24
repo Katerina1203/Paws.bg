@@ -1,74 +1,79 @@
-'use client';
-
+"use client"
+import React, { useState, useEffect, useMemo } from 'react';
 import { io } from 'socket.io-client';
 import styles from './privateroom.module.css';
-import React, { useState, useEffect } from 'react';
 
 const socket = io("http://192.168.1.8:5000");
 
-const PrivateRoom = ({ user, room }) => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+const PrivateRoom = ({ currentUser, room, otherUser }) => {
+	const [messages, setMessages] = useState([]);
+	const [newMessage, setNewMessage] = useState('');
+	const [activeRoom, setActiveRoom] = useState(room);
 
-  useEffect(() => {
-    if (room) {
-      socket.emit('join private', room);
+	useEffect(() => {
+		if (activeRoom) {
+			//TODO: checks if the active room is valid
+			socket.emit('join private', activeRoom);
 
-      socket.on('private message', (messageData) => {
-        console.log("private message executed successfully");
-        setMessages((prevMessages) => [...prevMessages, messageData]);
-      });
+			socket.on('private message', (messageData) => {
+				setMessages((prevMessages) => [...prevMessages, messageData]);
+			});
 
-      socket.on('existing messages', (fetchedMessages) => {
-        console.log("existing messages executed successfully");
-        setMessages(fetchedMessages);
-      });
+			socket.on('existing messages', (fetchedMessages) => {
+				if (typeof fetchedMessages == "string") return;
+				setMessages(fetchedMessages);
+			});
 
-      return () => {
-        console.log("exit from the component");
-        socket.off('private message');
-        socket.off('existing messages');
-      };
-    }
-  }, [room]);
+			return () => {
+				socket.off('private message');
+				socket.off('existing messages');
+			};
+		}
+	}, [activeRoom]);
 
-  const sendMessage = () => {
-    if (newMessage.trim() === '') return;
+	const sendMessage = () => {
+		if (newMessage.trim() === '') return;
 
-    const messageData = {
-      name: user?.username || 'Anonymous',
-      message: newMessage,
-      room: room,
-      timestamp: new Date().toLocaleTimeString(),
-    };
+		const messageData = {
+			senderId: currentUser._id,
+			name: currentUser?.username || 'Anonymous',
+			message: newMessage,
+		};
 
-    socket.emit('private message', { room, message: messageData });
-    setNewMessage('');
-  };
+		socket.emit('private message', { room: activeRoom, message: messageData });
+		setNewMessage('');
+	};
 
-  return (
-    <div className={styles.chatContainer}>
-      <h1 className={styles.chatHeader}>Private Chat</h1>
-      <div className={styles.messagesContainer}>
-      {messages.map((messageData, index) => (
-  <div key={index} className={styles.message}>
-    <strong>{messageData.name}:</strong> {messageData.message} 
-    <span className={styles.timestamp}>{messageData.timestamp}</span>
-  </div>
-))}
-      </div>
-      <div className={styles.inputContainer}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className={styles.input}
-          placeholder="Type a message..."
-        />
-        <button onClick={sendMessage} className={styles.btn}>Send</button>
-      </div>
-    </div>
-  );
+	const takeNameFromId = (id) => {
+		const user = currentUser._id === id ? currentUser : otherUser;
+		return user
+	}
+	return (
+		<div className={styles.container}>
+			{/* <Sidebar activeRoom={activeRoom} setActiveRoom={setActiveRoom} /> */}
+			<div className={styles.chatContainer}>
+				<h1 className={styles.chatHeader}>Private Chat</h1>
+				<div className={styles.messagesContainer}>
+					{messages.map((messageData, index) => (
+						<div key={index} className={styles.message}>
+							<strong>{takeNameFromId(messageData.name).username}:</strong> {messageData.message}
+							<span className={styles.timestamp}>{messageData.timestamp}</span>
+						</div>
+					))}
+				</div>
+				<div className={styles.inputContainer}>
+					<input
+						type="text"
+						value={newMessage}
+						onChange={(e) => setNewMessage(e.target.value)}
+						className={styles.input}
+						placeholder="Type a message..."
+					/>
+					<button onClick={sendMessage} className={styles.btn}>Send</button>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default PrivateRoom;

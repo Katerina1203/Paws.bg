@@ -3,14 +3,14 @@ import mongoose from "mongoose"
 const userSchema=new mongoose.Schema({
     username:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
         min:4,
         max:25,
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
     },
     password:{
@@ -39,6 +39,7 @@ const photoSchema = new mongoose.Schema({
     },
     animalId:{
       type  :mongoose.Schema.ObjectId,
+    //   ref: 'Animal',
     //  required: true,
     }
   },
@@ -48,28 +49,28 @@ const photoSchema = new mongoose.Schema({
 const animalSchema=new mongoose.Schema({
     description:{
         type:String,
-        require:true,      
+        required:true,      
     },
     type:{
         type:String,
-        require:true,      
+        required:true,      
     },
     age:{
         type:String,
-        require :true,
+        required :true,
     },
     city:{
         type:String,
-        require:true,
+        required:true,
     },
     gender:{
         type:String,
-        require:true,
+        required:true,
     },
     userID:{
         // type  :mongoose.Schema.ObjectId,
         type:String,
-        require:true,
+        required:true,
         ref: 'User',
     },
 },
@@ -86,7 +87,7 @@ const messageSchema = new mongoose.Schema({
         required: true
      },
      chatRoom: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'ChatRoom',
         required: true,
       },
@@ -95,10 +96,14 @@ const messageSchema = new mongoose.Schema({
 );
   
   const chatRoomSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
     participants: [
         {
           type: mongoose.Schema.ObjectId,
-          ref: 'User',
           required: true,
         },
       ],
