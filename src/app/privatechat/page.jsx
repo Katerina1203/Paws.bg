@@ -14,7 +14,7 @@ const ChatRoomPage = async ({ searchParams }) => {
     
     const otherUser = pUsers.includes(dbUser._id) ? user1 : user2
     
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!",otherUser);
+
     
 
     if (!session) {

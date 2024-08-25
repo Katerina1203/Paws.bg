@@ -1,6 +1,6 @@
 "use server"
 import { revalidatePath } from "next/cache"
-import { User, Animal, Photo } from "./models"
+import { User, Animal, Photo , Signal} from "./models"
 import { connectDB } from "./utils"
 import path from "path"
 import { writeFile } from "fs/promises"
@@ -156,9 +156,22 @@ export const deleteUser = async (formData) => {
 	  return null;
 	}
   };
+export const createSignal = async (description, latitude, longitude, userID) => {
 
-//   export const handleMessages = (currentUserId,user) => {
-    
-// 	const room = [currentUserId, user._id.toString()].sort().join('-'); // Create a unique room ID
-// 	router.push(`/privatechat?room=${room}`); // Navigate to the private chat with the room ID
-// };
+try {
+	await connectDB()
+	const newSignal = new Signal({
+		senderId: userID,
+		description: description,
+		location: {
+			type: "Point",
+			coordinates: [longitude, latitude] 
+		}
+	})
+
+	await newSignal.save();
+	console.log('Signal saved successfully:', newSignal);
+} catch (error) {
+	console.error('Error saving signal:', error);
+}
+};

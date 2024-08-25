@@ -36,11 +36,12 @@ const Contact = () => {
         <div className={styles.mapContainer}>
           <h2>Our Location</h2>
           <iframe
-             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2286540842567!2d-122.40401668468945!3d37.78583977975745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808b6f0b9cf7%3A0x11db13d48cb5f33c!2s1%20Market%20St%2C%20San%20Francisco%2C%20CA%2094105%2C%20USA!5e0!3m2!1sen!2s!4v1639340474457!5m2!1sen!2s"
+             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d518.3414884296003!2d23.31622313035926!3d42.6998615977523!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85682c6c4d0f%3A0x6c4dc6efdbbd84a2!2z0KHQvtGE0LjRjyDRhtC10L3RgtGK0YAsINCx0YPQuy4g4oCe0KXRgNC40YHRgtC-INCR0L7RgtC10LLigJwgNjgsIDEwMDAg0KHQvtGE0LjRjw!5e0!3m2!1sbg!2sbg!4v1724594817495!5m2!1sbg!2sb"
             allowFullScreen
             loading="lazy"
             className={styles.map}
           ></iframe>
+          
         </div>
 
         <div className={styles.socialMedia}>

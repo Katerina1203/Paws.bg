@@ -1,7 +1,7 @@
 import { createServer } from 'http';
 import { parse } from 'url';
 import next from 'next';
-import { Server as SocketIOServer } from 'socket.io'; // Use named import for Socket.io Server
+import { Server as SocketIOServer } from 'socket.io'; 
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -13,7 +13,7 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   });
 
-  const io = new SocketIOServer(server); // Instantiate the Socket.io server
+  const io = new SocketIOServer(server); 
 
   io.on('connection', (socket) => {
     console.log('A user connected');
@@ -25,7 +25,7 @@ app.prepare().then(() => {
     socket.on('sendMessage', async (message) => {
       const { chatRoomId, senderId, content } = message;
 
-      // Handle message saving and emitting logic here
+
       io.to(chatRoomId).emit('receiveMessage', {
         senderId,
         content,

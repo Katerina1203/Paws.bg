@@ -55,7 +55,7 @@ export default async function UserProfile({ userID }) {
                         </div>
                     </div>
 
-                    <PrivateChatButton currentUserId={currentUser._id} wantedUser={wantedUser} />
+                    <PrivateChatButton currentUserId={currentUser._id} wantedUserId={wantedUser._id} />
                     <form action={handleLogout} className={styles.formLogoutBtn}>
                         <button className={styles.actionButton} type="submit">
                             <Logout className={styles.actionButton} />

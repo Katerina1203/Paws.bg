@@ -15,21 +15,24 @@ const ServicesPage = () => {
         Осинови, не купувай.
         </h1>
         <p className={styles.information}>
-          We provide a range of high-quality services tailored to meet your needs. From personalized consultations to comprehensive solutions, our team is dedicated to delivering excellence. Explore what we offer and find out how we can assist you in achieving your goals.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam
         </p>
 
         <div className={styles.boxes}>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Consulting</h2>
-            <p className={styles.boxText}>Expert advice tailored to your business needs.</p>
+            <h2 className={styles.boxTitle}>Lorem</h2>
+            <p className={styles.boxText}>Lorem ipsum dolor sit amet, consectetur</p>
           </div>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Development</h2>
-            <p className={styles.boxText}>Custom solutions designed and built for you.</p>
+            <h2 className={styles.boxTitle}>Lorem</h2>
+            <p className={styles.boxText}>Lorem ipsum dolor sit amet, consectetur consecteturconsectetur</p>
           </div>
           <div className={styles.box}>
-            <h2 className={styles.boxTitle}>Support</h2>
-            <p className={styles.boxText}>Ongoing support to ensure your success.</p>
+            <h2 className={styles.boxTitle}>Lorem</h2>
+            <p className={styles.boxText}>Lorem ipsum dolor sit amet, consectetur</p>
           </div>
         </div>
       </div>
