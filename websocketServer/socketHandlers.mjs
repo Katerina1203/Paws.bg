@@ -1,11 +1,68 @@
-import { ChatRoom, Message } from "../src/lib/models.js";
-
+import { ChatRoom, Message } from "./models.js";
+import mongoose from "mongoose";
 const handleSocketConnection = (socket, io) => {
-	// Join general room
-	socket.on('join general', () => {
-		socket.emit('existing messages', generalMessages);
-	});
+	socket.on('join signal', async (signalId) => {
+        try {
+            let signalRoom = await ChatRoom.findOne({ name: signalId });
+console.log("In room " + signalRoom);
 
+            // If the room doesn't exist, create a new one
+            if (!signalRoom) {
+                signalRoom = new ChatRoom({
+                    name: signalId,  // Each signal has a unique room
+                    participants: []
+                });
+                await signalRoom.save();
+            }
+
+            // Join the room
+            socket.join(signalId);
+
+            // Fetch previous messages for the signal room
+            const messages = await Message.find({ chatRoom: signalRoom._id }).lean();
+
+            socket.emit('existing messages', messages.map(msg => ({
+                name: msg.senderId, // You can populate actual user names
+                message: msg.content,
+                timestamp: msg.createdAt.toLocaleString()
+            })));
+        } catch (error) {
+            console.error('Error joining signal room:', error);
+            socket.emit('existing messages', []);
+        }
+    });
+	socket.on('signal message', async ({ room, message }) => {
+        try {
+            const chatRoom = await ChatRoom.findOne({ name: room });
+
+            const senderObjectId = mongoose.Types.ObjectId.isValid(message.senderId) ? new mongoose.Types.ObjectId(message.senderId) : null;
+            if (!senderObjectId) {
+                throw new Error('Invalid senderId');
+            }
+
+            const newMessage = new Message({
+                senderId: senderObjectId,  // Ensure ObjectId format
+                content: message.message,
+                chatRoom: chatRoom._id,
+            });
+
+            await newMessage.save();
+
+            const messageData = {
+                name: message.name,
+                message: message.message,
+                timestamp: newMessage.createdAt.toLocaleString()
+            };
+
+            io.to(room).emit('signal message', messageData);
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    });
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
 	//Join a private room
 	socket.on('join private', async (room) => {
 		try {
@@ -43,7 +100,7 @@ const handleSocketConnection = (socket, io) => {
 		const chatRoom = await ChatRoom.findOne({ name: room });
 
 		const newMessage = new Message({
-			senderId: message.senderId, // Ensure you pass the sender's ID in the message object
+			senderId: message.senderId, 
 			content: message.message,
 			chatRoom: chatRoom._id,
 		});

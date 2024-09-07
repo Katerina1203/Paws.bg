@@ -15,6 +15,21 @@
     font-size: 24px;
     margin-bottom: 20px;
   }
+  .messageContainer {
+    display: flex;
+    flex-direction: column;  
+  }
+  
+  .message {
+    font-size: 16px;  
+    margin-bottom: 4px; 
+  }
+  
+  .timestamp {
+    font-size: 12px; 
+    color: gray;      
+    text-align: right; 
+  }
   
   .messagesContainer {
     max-height: 400px;
