@@ -6,7 +6,7 @@ import styles from './privateroom.module.css';
 import { IUser } from '@/types/models';
 import { ObjectId } from 'mongoose';
 
-const socket = io("http://192.168.1.8:5000");
+const socket = io("http://localhost:5000");
 
 type Params = {
 	currentUser: IUser;
@@ -26,7 +26,7 @@ const PrivateRoom = ({ currentUser, room, otherUser }: Params) => {
 	const [activeRoom, setActiveRoom] = useState(room);
 
 	useEffect(() => {
-		const socketInstance = io("http://192.168.1.8:5000");
+		const socketInstance = io("http://localhost:5000");
 
 		if (activeRoom) {
 			socketInstance.emit('join private', activeRoom);

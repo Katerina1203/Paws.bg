@@ -11,7 +11,7 @@ type Props = {
 const SignalCard = ({ signal }: Props) => {
     const latitude = signal.location.coordinates[1];
     const longitude = signal.location.coordinates[0];
-    
+
     const [address, setAddress] = useState<string>("");
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const SignalCard = ({ signal }: Props) => {
                 const data = await response.json();
 
                 if (data.results && data.results.length > 0) {
-                 
+
                     setAddress(data.results[0].formatted_address);
                 } else {
                     setAddress("Адресът не е намерен");
@@ -42,22 +42,20 @@ const SignalCard = ({ signal }: Props) => {
         <div className="max-w-80 min-h-80">
             <Link href={`/allsignals/${signal._id}`} className="block">
                 <div className="w-full flex items-center justify-between">
-                    <p>Сигнал от</p>
-            
                 </div>
                 <div className="mt-2">
-                    <p>{signal.description}</p>
+                    <p>{signal.name}</p>
                 </div>
                 <div className="mt-4">
-                 
-                    <p>Локация: {address ? address : "Зареждане на адрес..."}</p>
+                    <p className="text-xs">Локация: <span className="text-xs">{address ? address : "Зареждане на адрес..."}</span></p>
                 </div>
 
+
                 <div className="w-full flex justify-center mx-auto">
-                <StaticGoogleMap
-                    latitude={latitude}
-                    longitude={longitude}
-                />
+                    <StaticGoogleMap
+                        latitude={latitude}
+                        longitude={longitude}
+                    />
                 </div>
             </Link>
         </div>

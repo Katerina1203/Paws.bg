@@ -11,7 +11,7 @@ type ChatRoomProps = {
   userName:String;
 };
 
-const socket = io("http://localhost:5000"); // Adjust to your server URL
+const socket = io("http://localhost:5000"); 
 
 const ChatRoom = ({ userId,userName, signalId }: ChatRoomProps) => {
   const [messages, setMessages] = useState<any[]>([]);

@@ -10,8 +10,7 @@ import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal'
 type Props = {
     user: any;
 }
-// const session = await auth();
-// const dbUser = await getUser(session?.user.email)
+
 const Signal = ({ user }: Props) => {
     const [latitude, setLatitude] = useState(24.799448);
     const [longitude, setLongitude] = useState(54.979021);
@@ -22,7 +21,7 @@ const Signal = ({ user }: Props) => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        console.log("the id is *********************");
+  
         
 console.log(user._id);
 

@@ -4,12 +4,12 @@ const handleSocketConnection = (socket, io) => {
 	socket.on('join signal', async (signalId) => {
         try {
             let signalRoom = await ChatRoom.findOne({ name: signalId });
-console.log("In room " + signalRoom);
+
 
             // If the room doesn't exist, create a new one
             if (!signalRoom) {
                 signalRoom = new ChatRoom({
-                    name: signalId,  // Each signal has a unique room
+                    name: signalId, 
                     participants: []
                 });
                 await signalRoom.save();
@@ -18,11 +18,11 @@ console.log("In room " + signalRoom);
             // Join the room
             socket.join(signalId);
 
-            // Fetch previous messages for the signal room
+          
             const messages = await Message.find({ chatRoom: signalRoom._id }).lean();
 
             socket.emit('existing messages', messages.map(msg => ({
-                name: msg.senderId, // You can populate actual user names
+                name: msg.senderId, 
                 message: msg.content,
                 timestamp: msg.createdAt.toLocaleString()
             })));
@@ -41,7 +41,7 @@ console.log("In room " + signalRoom);
             }
 
             const newMessage = new Message({
-                senderId: senderObjectId,  // Ensure ObjectId format
+                senderId: senderObjectId,  
                 content: message.message,
                 chatRoom: chatRoom._id,
             });

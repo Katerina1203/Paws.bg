@@ -2,7 +2,7 @@ import SignalCard from "@/components/SignalCard/SignalCard";
 import { getAllSignals } from "@/lib/data";
 
 const AllSignals = async () => {
-	// Fetch the signals from the database
+	
 	const signals = await getAllSignals();
 
 	return (

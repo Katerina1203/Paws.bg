@@ -1,4 +1,4 @@
-// "use client"
+
 import { getUserById, getAnimalsByUserId, getUser } from "@/lib/data";
 import Image from "next/image";
 import { handleLogout } from '@/lib/actions';

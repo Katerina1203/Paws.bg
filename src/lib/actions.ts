@@ -96,7 +96,7 @@ export const handleLogout = async () => {
 	await signOut({ redirectTo: "/" });
 }
 export async function getUserWithCredentialsFromForm(formData: FormData) {
-	console.log("formData", formData);
+	
 
 	try {
 		const response = await signIn("credentials", {
@@ -175,7 +175,7 @@ try {
 			coordinates: [longitude, latitude] 
 		}
 	})
-console.log(newSignal);
+
 	await newSignal.save();
 	console.log('Signal saved successfully:', newSignal);
 } catch (error) {

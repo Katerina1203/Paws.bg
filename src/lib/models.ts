@@ -39,8 +39,7 @@ const photoSchema = new mongoose.Schema<IPhoto>({
     },
     animalId: {
         type: mongoose.Schema.ObjectId,
-        //   ref: 'Animal',
-        //  required: true,
+ 
     }
 },
     { timestamps: true }
@@ -68,7 +67,7 @@ const animalSchema = new mongoose.Schema<IAnimal>({
         required: true,
     },
     userID: {
-        // type  :mongoose.Schema.ObjectId,
+        
         type: String,
         required: true,
         ref: 'User',
@@ -115,6 +114,10 @@ const signalSchema = new mongoose.Schema<ISignal>({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    name:{
+        type: String,
+        required: true,
     },
     description: {
         type: String,

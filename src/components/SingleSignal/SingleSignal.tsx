@@ -18,7 +18,7 @@ const SingleSignal = async ({ id }: Params) => {
 		return <div>Signal not found.</div>;
 	}
 
-	// Ensure signal._id is a valid ObjectId, convert if necessary
+
 	let signalObjectId: ObjectId;
 	if (typeof signal._id === 'string') {
 		signalObjectId = new ObjectId(signal._id);
@@ -35,9 +35,9 @@ const SingleSignal = async ({ id }: Params) => {
 				</div>
 			</div>
 
-			{/* Signal Map and Info */}
+	
 			<div className="w-full md:w-2/3 flex flex-col gap-6">
-				{/* Static Google Map */}
+			
 				<div className="w-full h-[400px] rounded-md shadow-lg">
 					<StaticGoogleMap
 						latitude={signal.location.coordinates[1]} 
@@ -45,7 +45,7 @@ const SingleSignal = async ({ id }: Params) => {
 					/>
 				</div>
 
-				{/* Signal Information */}
+				
 				<div className="mt-6 p-6 bg-white rounded-md shadow-lg">
 					<h2 className="text-xl font-semibold mb-4">Информация за сигнала</h2>
 					<div className="mb-2 text-lg">
