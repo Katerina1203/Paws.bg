@@ -13,8 +13,7 @@ export const POST = async (request: Request) => {
             password: hashedPass,
             email,
         }
-        console.log(newUser);
-
+       
         await createUser(newUser)
     } catch (e) {
         console.error(e)    
