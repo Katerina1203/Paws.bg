@@ -163,7 +163,6 @@ export const deleteUser = async (formData: FormData) => {
 	}
   };
 export const createSignal = async (signalName : string ,description: string, latitude: number, longitude: number, userID: string) => {
-
 try {
 	await connectDB()
 	const newSignal = new Signal({

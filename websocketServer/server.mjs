@@ -4,29 +4,10 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import handleSocketConnection from "./socketHandlers.mjs";
 import dotenv from 'dotenv';
-
+import { connectDB } from "./lib/utils";
 dotenv.config();
 
 let connection = { isConnected: false };
-
-const connectDB = async () => {
-	if (connection.isConnected) {
-		
-		console.log('Already connected to MongoDB');
-		return;
-	}
-
-	try {
-
-		const db = await mongoose.connect(process.env.MONGODB);
-		
-		connection.isConnected = db.connections[0].readyState;
-		console.log('Connected to MongoDB');
-	} catch (e) {
-		console.error('Failed to connect to MongoDB', e);
-	}
-};
-
 
 connectDB();
 

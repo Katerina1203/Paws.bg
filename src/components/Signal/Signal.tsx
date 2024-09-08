@@ -12,8 +12,8 @@ type Props = {
 }
 
 const Signal = ({ user }: Props) => {
-    const [latitude, setLatitude] = useState(24.799448);
-    const [longitude, setLongitude] = useState(54.979021);
+    const [latitude, setLatitude] = useState(42.6977);
+    const [longitude, setLongitude] = useState(23.3219);
     const [address, setAddress] = useState("");
     const [description, setDescription] = useState("");
     const [signalName, setSignalName] = useState("");
@@ -21,10 +21,6 @@ const Signal = ({ user }: Props) => {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-  
-        
-console.log(user._id);
-
         try {
             await createSignal(signalName,description, latitude, longitude, user._id);
 
